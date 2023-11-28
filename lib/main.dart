@@ -9,7 +9,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -21,11 +20,10 @@ class MyApp extends StatelessWidget {
           ),
           body: ListView(
             children: [
-               Task('Aprender Flutter no café da manhã!'),
-               Task('Andar De Bike'),
-               Task('Meditar'),
-               Task('Ir para o intervalo'),
-
+              Task('Aprender Flutter no intervalo'),
+              Task('Andar De Bike'),
+              Task('Meditar'),
+              Task('Ir para o intervalo'),
             ],
           ),
           floatingActionButton: FloatingActionButton(onPressed: () {})),
@@ -44,9 +42,9 @@ class Task extends StatefulWidget {
 
 class _TaskState extends State<Task> {
   int nivel = 0;
+
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -73,24 +71,40 @@ class _TaskState extends State<Task> {
                           width: 200,
                           child: Text(
                             widget.none,
-                            style: const TextStyle(fontSize: 24, overflow: TextOverflow.ellipsis
-                            ),
-                          )
-                      ),
+                            style: const TextStyle(
+                                fontSize: 24, overflow: TextOverflow.ellipsis),
+                          )),
                       ElevatedButton(
                           onPressed: () {
-                            setState((){nivel++;
+                            setState(() {
+                              nivel++;
                             });
 
                             print(nivel);
-                          }, child: const Icon(Icons.arrow_drop_up))
+                          },
+                          child: const Icon(Icons.arrow_drop_up))
                     ],
                   ),
                 ),
-                Text('Nivel: $nivel', style: TextStyle(color: Colors.white, fontSize: 16),)
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(child: LinearProgressIndicator(
+                        color: Colors.white, value: nivel / 10,
+                      ),
+                        width: 200,
+                      ),
+                      Text(
+                        'Nivel: $nivel',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
-
           ],
         ),
       ),
