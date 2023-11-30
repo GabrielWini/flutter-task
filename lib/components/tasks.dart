@@ -1,63 +1,11 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp( MyApp());
-}
-
-class MyApp extends StatefulWidget {
-   MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool opacidade = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('Tarefas'),
-            leading: Icon(Icons.add_task),
-          ),
-          body: AnimatedOpacity(
-            opacity: opacidade? 1.0 : 0.0,
-            duration: Duration(seconds: 1),
-            child: ListView(
-              children: [
-                Task('Aprender Flutter no intervalo',
-                    'https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large',1),
-                Task('Andar De Bike',
-                    'https://tswbike.com/wp-content/uploads/2020/09/108034687_626160478000800_2490880540739582681_n-e1600200953343.jpg',2),
-                Task('Ler',
-                    'https://thebogotapost.com/wp-content/uploads/2017/06/636052464065850579-137719760_flyer-image-1.jpg',3),
-                Task('Meditar',
-                    'https://manhattanmentalhealthcounseling.com/wp-content/uploads/2019/06/Top-5-Scientific-Findings-on-MeditationMindfulness-881x710.jpeg',4),
-              ],
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(onPressed: () {
-            setState(() {
-              opacidade = !opacidade;
-            });
-          },
-            child: Icon(Icons.remove_red_eye),
-          )
-      ),
-    );
-  }
-}
+import 'package:gerenciadordetarefas/components/dificulty.dart';
 
 class Task extends StatefulWidget {
   final String none;
   final String foto;
   final int dificuldade;
+
 
   const Task(this.none,this.foto,this.dificuldade, {Key? key}) : super(key: key);
 
@@ -77,8 +25,8 @@ class _TaskState extends State<Task> {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: Colors.lightBlueAccent
+                  borderRadius: BorderRadius.circular(4),
+                  color: Colors.lightBlueAccent
               ),
               height: 140,
             ),
@@ -103,7 +51,7 @@ class _TaskState extends State<Task> {
                         height: 100,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(4),
-                          child: Image.network(
+                          child: Image.asset(
                             widget.foto,
                             fit: BoxFit.cover,
                           ),
@@ -122,50 +70,8 @@ class _TaskState extends State<Task> {
                                   overflow: TextOverflow.ellipsis),
                             ),
                           ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                size: 15,
-                                color:
-                                  (widget.dificuldade >= 1)
-                                      ? Colors.blue :
-                                  Colors.blue[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 15,
-                                color:
-                                (widget.dificuldade >= 2)
-                                    ? Colors.blue :
-                                Colors.blue[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 15,
-                                color:
-                                (widget.dificuldade >= 3)
-                                    ? Colors.blue
-                                    : Colors.blue[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 15,
-                                color:
-                                (widget.dificuldade >= 4)
-                                    ? Colors.blue
-                                    : Colors.blue[100],
-                              ),Icon(
-                                Icons.star,
-                                size: 15,
-                                color:
-                                (widget.dificuldade >= 5)
-                                    ? Colors.blue
-                                    : Colors.blue[100],
-                              ),
-
-                            ],
-                          ),
+                          Difficulty(widget.dificuldade),
+                          //TASK ANTERIORMENTE
                         ],
                       ),
                       Container(
