@@ -24,8 +24,7 @@ class _InitialScreenState extends State<InitialScreen> {
           duration: Duration(seconds: 1),
           child: ListView(
             children: [
-              Task('Aprender Flutter no intervalo', 'assets/images/flutter.png',
-                  1),
+              Task('Aprender Flutter no intervalo', 'assets/images/flutter.png', 1),
               Task('Andar De Bike', 'assets/images/bike.webp', 2),
               Task('Ler', 'assets/images/ler.jpg,', 3),
               Task('Meditar', 'assets/images/meditar.jpg', 4),
